@@ -1,0 +1,13 @@
+general notes
+
+- use 'brownie init --force' to initialise brownie project despite
+    'file is not empty' error after .gitignore, README etc exists
+
+- https://rinkeby.etherscan.io/address/0x48E3Ae871Bea1745040B858A8dd3D06e3e59De1C#writeContract
+    Can view a verified published contract on the blockchain (once the API is set up) here
+    Test Read/Write to test the View/Interact functions
+
+- FORKING vs MOCKING
+    wrt bringing price ethereum price feeds into a Ganache env
+    - Forking: 
+    - Mocking/Mocks: deploy a fake version of something in a new env for testing etc
