@@ -9,5 +9,5 @@ general notes
 
 - FORKING vs MOCKING
     wrt bringing price ethereum price feeds into a Ganache env
-    - Forking: 
     - Mocking/Mocks: deploy a fake version of something in a new env for testing etc
+    - Forking: 
