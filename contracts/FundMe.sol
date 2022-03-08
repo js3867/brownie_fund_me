@@ -10,14 +10,12 @@ contract FundMe {
     mapping(address => uint256) public addressToAmountFunded;
     address public owner;
     address[] funders;
-
     // ******* NEW TO LESSON 6 *******
     AggregatorV3Interface public priceFeed;
 
     constructor(address _priceFeed) public {
         // add instruction for where to pull price feed from instead of hard coding the address below
         priceFeed = AggregatorV3Interface(_priceFeed);
-
         owner = msg.sender;
     }
 
@@ -49,7 +47,6 @@ contract FundMe {
     function getPrice() public view returns (uint256) {
         // we can still return a 5 item tuple without providing 'unused values'
         (, int256 answer, , , ) = priceFeed.latestRoundData();
-
         return uint256(answer * 10_000_000_000);
     }
 
@@ -69,6 +66,16 @@ contract FundMe {
         uint256 ethPrice = getPrice();
         uint256 ethAmountInUsd = (ethPrice * ethAmount) / (10**18); // solidity words in wei integers, so must convert ETH to WEI
         return ethAmountInUsd;
+    }
+
+    function getEntranceFee() public view returns (uint256) {
+        // minimumUSD
+        uint256 minimumUSD = 50 * 10**18;
+        uint256 price = getPrice();
+        uint256 precision = 1 * 10**18;
+        // return (minimumUSD * precision) / price;
+        // We fixed a rounding error found in the video by adding one!
+        return ((minimumUSD * precision) / price) + 1;
     }
 
     // the modifier code shall run..
